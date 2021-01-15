@@ -37,5 +37,22 @@
   - (http.request or tls.handshake.type == 1 or tcp.flags eq 0x0002) and !(udp.port eq 1900)
   - (http.request or tls.handshake.type == 1 or tcp.flags eq 0x0002 or dns) and !(udp.port eq 1900)
 - [Wireshark によるパケット解析講座 3: ホストとユーザーを特定する](https://unit42.paloaltonetworks.jp/using-wireshark-identifying-hosts-and-users/)
-
+  - > ネットワーク内でトラフィックを生成するホストには3つの識別子が必要です。 それはMacアドレス、 IPアドレス、そしてホスト名です。
+  - > 疑わしい活動に対する警告はIPアドレスに基づいています。
+  - DHCP
+  - NBNS
+  - dhcp フィルタ
+    - Client Identifier > Client MAC Address
+    - Host Name > Host Name
+    - > WireSharkのPreferencesでMacアドレスの名前解決を有効に設定している場合、図3のようにMACアドレス先頭にベンダ名が表示されます。ここにベンダ名が表示されていない場合は、Wireshark の Preferences メニューの Name Resolution で Resolve MAC addresses のチェックボックスにチェックを入れて有効にします
+  - DHCPリースが更新される頻度によっては、pcapにDHCPトラフィックが含まれていないこともあります。その場合でもNBNSトラフィックを使用することで、Microsoft Windowsを実行しているコンピュータやMacOSを実行しているAppleホストのホスト名を識別することはできます。
+  - nbns フィルタ
+  - info、NetBIOS Name Service > Additional Records でホスト名が確認できる
+  - > HTTPトラフィックのヘッダにあるUser-agent文字列からオペレーティングシステムを確認できることがあります。HTTPトラフィックがAndroidデバイスからのものであれば、デバイスの製造元とモデルも判断できます。
+    - [追跡]、[TCPストリーム]の順にクリックでユーザエージェントが確認できる
+  - > Active Directory（AD）環境のWindowsホストの場合、Kerberosトラフィックからユーザーアカウント名を見つけることができます。
+    - kerberos.CNameString フィルタ
+    - Kerberos > as-req > req-body > cname > cname-string > CNameString でホスト名やユーザアカウントが確認できる
+    - > ホスト名のCNameString値は常に末尾が$（ドル記号）になっていますが、ユーザーアカウント名にはこのドル記号はついていません。
+    - kerberos.CNameString and !(kerberos.CNameString contains $) フィルタ
   
