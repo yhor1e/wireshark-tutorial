@@ -55,4 +55,4 @@
     - Kerberos > as-req > req-body > cname > cname-string > CNameString でホスト名やユーザアカウントが確認できる
     - > ホスト名のCNameString値は常に末尾が$（ドル記号）になっていますが、ユーザーアカウント名にはこのドル記号はついていません。
     - kerberos.CNameString and !(kerberos.CNameString contains $) フィルタ
-  
+- [Wireshark によるパケット解析講座 4: Pcapからのオブジェクトのエクスポート](https://unit42.paloaltonetworks.jp/using-wireshark-exporting-objects-from-a-pcap/)  
