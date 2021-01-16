@@ -73,3 +73,4 @@
       - > メニューをクリックし、「Raw (ロー)」を選択します。
       - > 「Save as…(名前を付けて保存)」ボタンを使用して、これをロー バイナリとして保存できます。
       - > FTPデータ チャネル経由で送信された関連付けられたファイルを確認するには、図21に示すように、「ftp-data.command contains .html (.htmlを含むftp-data.command)」フィルターを使用します。
+- [Wiresharkによるパケット解析講座 8：HTTPSトラフィックの復号](https://unit42.paloaltonetworks.jp/wireshark-tutorial-decrypting-https-traffic/)
