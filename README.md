@@ -56,3 +56,20 @@
     - > ホスト名のCNameString値は常に末尾が$（ドル記号）になっていますが、ユーザーアカウント名にはこのドル記号はついていません。
     - kerberos.CNameString and !(kerberos.CNameString contains $) フィルタ
 - [Wireshark によるパケット解析講座 4: Pcapからのオブジェクトのエクスポート](https://unit42.paloaltonetworks.jp/using-wireshark-exporting-objects-from-a-pcap/)  
+  - File > Export Objects > HTTP…
+  - > file [ファイル名] 
+    - ファイルの種類を返す
+  - > shasum -a 256 [ファイル名]
+    - > SHA256ハッシュをVirusTotalでチェックすれば、これらのファイルがマルウェアとして検出されるかが判明します。
+  - File > Export Objects > SMB…
+  - > これらのファイルの適切なコピーをエクスポートするには、「Content Type (コンテンツ タイプ)」の数字が[100.00%]でなければいけません。数字が100%を下回っている場合は、ネットワーク トラフィックにおいて何らかのデータ損失が発生し、結果的にファイルが破損したり、不完全なコピーになったりしていることを意味します。
+  - smtp.data.fragment フィルタ
+  - File > Export Objects > IMF…
+    - > IMFはInternet Message Formatの略で、.emlファイル拡張子が付加された名前で保存されます。 
+  - ftp.request.command フィルタ
+  - ftp-data フィルタ
+    - > Wiresharkの「Export Objects (オブジェクトのエクスポート)」機能を使用して、これらのオブジェクトをエクスポートすることはできません。ただし、それぞれについて、データ チャネルからTCPストリームをたどる(フォローする)ことはできます。
+    - > Follow (フォロー)」–>「TCP stream (TCPストリーム)」を選択
+      - > メニューをクリックし、「Raw (ロー)」を選択します。
+      - > 「Save as…(名前を付けて保存)」ボタンを使用して、これをロー バイナリとして保存できます。
+      - > FTPデータ チャネル経由で送信された関連付けられたファイルを確認するには、図21に示すように、「ftp-data.command contains .html (.htmlを含むftp-data.command)」フィルターを使用します。
